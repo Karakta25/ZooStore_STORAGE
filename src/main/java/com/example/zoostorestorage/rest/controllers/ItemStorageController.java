@@ -15,7 +15,9 @@ import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStor
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceInput;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOperation;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOutput;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -48,13 +50,15 @@ public class ItemStorageController {
     }
 
     @PostMapping(path = "/addItem")
-    public AddItemToStorageOutput addItemToStorage(@RequestBody AddItemToStorageInput input)
+    public ResponseEntity<AddItemToStorageOutput> addItemToStorage(@Valid @RequestBody AddItemToStorageInput input)
     {
-        return addItemToStorageOperation.process(input);
+        AddItemToStorageOutput response = this.addItemToStorageOperation.process(input);
+        return ResponseEntity.status(201).body(response);
     }
 
     @DeleteMapping(path = "item/delete")
-    public RemoveItemFromStorageOutput removeItemFromStorage(@RequestBody RemoveItemFromStorageInput input) {
-        return removeItemFromStorageOperation.process(input);
+    public ResponseEntity<RemoveItemFromStorageOutput> removeItemFromStorage(@Valid @RequestBody RemoveItemFromStorageInput input) {
+        RemoveItemFromStorageOutput response =  this.removeItemFromStorageOperation.process(input);
+        return ResponseEntity.ok(response);
     }
 }
