@@ -4,6 +4,7 @@ import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.A
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemInput;
 import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
+import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemStorageByIdOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemInput;
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageInput;
@@ -33,4 +34,6 @@ public interface ZooStorageRestClient {
     @RequestLine("DELETE /storage/item")
     RemoveItemFromStorageOutput removeItemFromStorage(@Param RemoveItemFromStorageInput input);
 
+    @RequestLine("GET /storage/itemById/{itemId}")
+    GetItemStorageByIdOutput getItemFromStorage(@Param String itemId);
 }

@@ -2,6 +2,4 @@ package com.example.zoostorestorage.api.operations.itemStorage.removeItemFromSto
 
 import com.example.zoostorestorage.api.operations.itemStorage.base.OperationProcessor;
 
-public interface RemoveItemFromStorageOperation extends OperationProcessor<RemoveItemFromStorageInput,RemoveItemFromStorageOutput> {
-
-}
+public interface RemoveItemFromStorageOperation extends OperationProcessor<RemoveItemFromStorageInput,RemoveItemFromStorageOutput> {}

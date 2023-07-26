@@ -1,8 +1,12 @@
 package com.example.zoostorestorage.rest.controllers;
 
+
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageInput;
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOperation;
+import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdInput;
+import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdOperation;
+import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemStorageByIdOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemInput;
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOperation;
@@ -28,6 +32,7 @@ public class ItemStorageController {
     private final ImportItemOperation importItemOperation;
     private final ExportItemOperation exportItemOperation;
     private final SetItemPriceOperation setItemPriceOperation;
+    private final GetItemByIdOperation getItemByIdOperation;
     private final AddItemToStorageOperation addItemToStorageOperation;
     private final RemoveItemFromStorageOperation removeItemFromStorageOperation;
 
@@ -65,4 +70,14 @@ public class ItemStorageController {
         RemoveItemFromStorageOutput response = this.removeItemFromStorageOperation.process(input);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping(path = "/itemById/{itemId}")
+    public ResponseEntity<GetItemStorageByIdOutput> getItemFromStorage(@PathVariable String itemId)
+    {
+        GetItemByIdInput input = GetItemByIdInput.builder().itemID(itemId).build();
+
+        GetItemStorageByIdOutput response = this.getItemByIdOperation.process(input);
+        return ResponseEntity.ok(response);
+    }
+
 }
