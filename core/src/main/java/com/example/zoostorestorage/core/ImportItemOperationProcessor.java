@@ -20,12 +20,9 @@ public class ImportItemOperationProcessor implements ImportItemOperation {
     @Override
     public ImportItemOutput process(ImportItemInput input) {
 
-        Optional<ItemStorage> optionalItemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()));
+        ItemStorage itemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()))
+                .orElseThrow(NoSuchItemException::new);
 
-       if(!optionalItemStorage.isPresent())
-           throw new NoSuchItemException();
-
-        ItemStorage itemStorage = optionalItemStorage.get();
             itemStorage.setQuantity(itemStorage.getQuantity() + input.getImportQuantity());
 
             itemStorageRepository.save(itemStorage);

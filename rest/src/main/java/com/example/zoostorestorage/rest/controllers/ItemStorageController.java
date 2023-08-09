@@ -16,6 +16,9 @@ import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportI
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageInput;
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOperation;
+import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleInput;
+import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOperation;
+import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceInput;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOperation;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOutput;
@@ -35,6 +38,7 @@ public class ItemStorageController {
     private final GetItemByIdOperation getItemByIdOperation;
     private final AddItemToStorageOperation addItemToStorageOperation;
     private final RemoveItemFromStorageOperation removeItemFromStorageOperation;
+    private final SaleOperation saleOperation;
 
     @PatchMapping(path = "/importItem")
     public ResponseEntity<ImportItemOutput> importItem(@Valid @RequestBody ImportItemInput input)
@@ -65,6 +69,14 @@ public class ItemStorageController {
     }
 
 
+    @PostMapping(path = "/sale")
+    public ResponseEntity<SaleOutput> saleOperation(@Valid @RequestBody SaleInput input)
+    {
+        SaleOutput response = this.saleOperation.process(input);
+        return ResponseEntity.ok(response);
+    }
+
+
     @DeleteMapping(path = "/item")
     public ResponseEntity<RemoveItemFromStorageOutput> removeItemFromStorage(@Valid @RequestBody RemoveItemFromStorageInput input) {
         RemoveItemFromStorageOutput response = this.removeItemFromStorageOperation.process(input);
@@ -79,5 +91,7 @@ public class ItemStorageController {
         GetItemStorageByIdOutput response = this.getItemByIdOperation.process(input);
         return ResponseEntity.ok(response);
     }
+
+
 
 }

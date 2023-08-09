@@ -22,12 +22,8 @@ public class SetItemPriceOperationProcessor implements SetItemPriceOperation {
     @Override
     public SetItemPriceOutput process(SetItemPriceInput input) {
 
-        Optional<ItemStorage> optionalItemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()));
-
-        if(!optionalItemStorage.isPresent())
-            throw new NoSuchItemException();
-
-        ItemStorage itemStorage = optionalItemStorage.get();
+        ItemStorage itemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()))
+                .orElseThrow(NoSuchItemException::new);
 
 
         if(input.getPrice()<0)
@@ -41,7 +37,7 @@ public class SetItemPriceOperationProcessor implements SetItemPriceOperation {
 
         return SetItemPriceOutput.builder()
                         .itemID(itemStorage.getItemID().toString())
-                                .price(itemStorage.getPrice()).build();
+                        .price(itemStorage.getPrice()).build();
 
     }
 }

@@ -23,12 +23,10 @@ public class RemoveItemFromStorageOperationProcessor implements RemoveItemFromSt
         @Override
         public RemoveItemFromStorageOutput process(RemoveItemFromStorageInput input) {
 
-            Optional<ItemStorage> itemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemId()));
+            ItemStorage itemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemId()))
+                    .orElseThrow(NoSuchItemException::new);
 
-            if(!itemStorage.isPresent())
-                throw new NoSuchItemException();
-
-            itemStorageRepository.delete(itemStorage.get());
+            itemStorageRepository.delete(itemStorage);
             return RemoveItemFromStorageOutput.builder().itemId(input.getItemId()).build();
         }
 }

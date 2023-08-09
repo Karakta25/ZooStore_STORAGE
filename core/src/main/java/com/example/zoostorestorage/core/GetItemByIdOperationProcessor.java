@@ -21,12 +21,8 @@ public class GetItemByIdOperationProcessor implements GetItemByIdOperation {
     public GetItemStorageByIdOutput process(GetItemByIdInput input) {
 
 
-            Optional<ItemStorage> optionalItemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()));
-
-            if(!optionalItemStorage.isPresent())
-                throw new NoSuchItemException();
-
-            ItemStorage item = optionalItemStorage.get();
+        ItemStorage item = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()))
+                .orElseThrow(NoSuchItemException::new);
 
             return GetItemStorageByIdOutput.builder()
                     .itemID(item.getItemID().toString())

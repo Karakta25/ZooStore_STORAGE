@@ -21,8 +21,9 @@
         <dependency>
             <groupId>com.example.zoostore</groupId>
             <artifactId>restExport</artifactId>
-            <version>${revision}</version>
+            <version>${zoostore.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

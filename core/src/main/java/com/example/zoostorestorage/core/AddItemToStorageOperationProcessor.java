@@ -1,6 +1,7 @@
 package com.example.zoostorestorage.core;
 
 
+
 import com.example.zoostoreproject.restExport.ZooStoreRestClient;
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageInput;
 import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOperation;
@@ -9,7 +10,6 @@ import com.example.zoostorestorage.core.exception.NoSuchItemException;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
 import com.example.zoostorestorage.persistence.repositories.ItemStorageRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

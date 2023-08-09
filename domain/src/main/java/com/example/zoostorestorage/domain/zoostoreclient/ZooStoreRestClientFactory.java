@@ -1,6 +1,7 @@
 package com.example.zoostorestorage.domain.zoostoreclient;
 
 
+
 import com.example.zoostoreproject.restExport.ZooStoreRestClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Feign;
@@ -13,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class ZooStoreRestClientFactory {
-    @Bean
-    ZooStoreRestClient getRestExportClient() {
+   @Bean
+   ZooStoreRestClient getRestExportClient() {
         final ObjectMapper objectMapper = new ObjectMapper();
         return Feign.builder()
                 .encoder(new JacksonEncoder(objectMapper))

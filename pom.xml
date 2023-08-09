@@ -16,8 +16,6 @@
         <module>persistence</module>
         <module>rest</module>
         <module>restExport</module>
-
-
     </modules>
 
 
@@ -26,13 +24,16 @@
     <version>${revision}</version>
     <name>ZooStoreStorage</name>
     <description>ZooStoreStorage</description>
+
+
     <properties>
         <revision>0.0.3-SNAPSHOT</revision>
         <java.version>17</java.version>
+        <zoostore.version>0.0.3-SNAPSHOT</zoostore.version>
+        <bff.version>0.0.1-SNAPSHOT</bff.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

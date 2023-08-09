@@ -34,8 +34,13 @@
                 <groupId>com.example.zoostorage</groupId>
                 <artifactId>domain</artifactId>
                 <version>${revision}</version>
-
             </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.example.zoostore</groupId>-->
+<!--            <artifactId>api</artifactId>-->
+<!--            <version>${zoostore.version}</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

@@ -1,8 +1,9 @@
 package com.example.zoostorestorage.core;
 
+
 import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOperation;
+import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
 import com.example.zoostorestorage.core.exception.NegativeUpdatedQuantityException;
 import com.example.zoostorestorage.core.exception.NoSuchItemException;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
@@ -23,12 +24,8 @@ public class ExportItemOperationProcessor implements ExportItemOperation {
     @Override
     public ExportItemOutput process(ExportItemInput input) {
 
-        Optional<ItemStorage> optionalItemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()));
-
-        if(!optionalItemStorage.isPresent())
-            throw new NoSuchItemException();
-
-        ItemStorage itemStorage = optionalItemStorage.get();
+        ItemStorage itemStorage = itemStorageRepository.findByItemID(UUID.fromString(input.getItemID()))
+                .orElseThrow(NoSuchItemException::new);
 
         if(itemStorage.getQuantity() - input.getExportQuantity() < 0)
             throw new NegativeUpdatedQuantityException();

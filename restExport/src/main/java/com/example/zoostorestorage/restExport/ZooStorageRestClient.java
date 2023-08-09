@@ -9,15 +9,21 @@ import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportI
 import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageInput;
 import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOutput;
+import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleInput;
+import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOutput;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceInput;
 import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOutput;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
+import lombok.RequiredArgsConstructor;
 
 
 @Headers({"Content-Type: application/json"})
 public interface ZooStorageRestClient {
+
+    @RequestLine("POST /storage/sale")
+    SaleOutput sale(SaleInput input);
 
     @RequestLine("PATCH /storage/importItem")
     ImportItemOutput importItem(@Param ImportItemInput input);
