@@ -1,5 +1,6 @@
 package com.example.zoostorestorage.persistence.entities;
 
+import com.example.zoostorestorage.persistence.OrderItemStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,6 +25,9 @@ public class OrderItem {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
+    @Column(nullable = false)
+    private OrderItemStatus status;
 
     @ManyToOne
     @JoinColumn(name = "order_record_id", nullable = false)

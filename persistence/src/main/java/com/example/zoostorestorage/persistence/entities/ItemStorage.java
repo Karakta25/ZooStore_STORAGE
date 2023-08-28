@@ -3,6 +3,7 @@ package com.example.zoostorestorage.persistence.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -19,13 +20,13 @@ public class ItemStorage {
     @Column(name = "id")
     private UUID id;
 
-    @Column(name = "itemID", nullable = false)
+    @Column(name = "itemID",unique = true, nullable = false)
     private UUID itemID;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
     @Column(name = "price", nullable = false)
-    private double price;
+    private BigDecimal price;
 
 }

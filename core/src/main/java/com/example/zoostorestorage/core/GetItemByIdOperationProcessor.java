@@ -1,15 +1,14 @@
 package com.example.zoostorestorage.core;
 
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdInput;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemStorageByIdOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemByIdInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemByIdOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemStorageByIdOutput;
 import com.example.zoostorestorage.core.exception.NoSuchItemException;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
 import com.example.zoostorestorage.persistence.repositories.ItemStorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,7 +25,7 @@ public class GetItemByIdOperationProcessor implements GetItemByIdOperation {
 
             return GetItemStorageByIdOutput.builder()
                     .itemID(item.getItemID().toString())
-                    .price(item.getPrice())
+                    .price(item.getPrice().doubleValue())
                     .quantity(item.getQuantity())
                     .build();
 

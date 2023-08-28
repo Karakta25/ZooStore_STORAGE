@@ -1,9 +1,9 @@
 package com.example.zoostorestorage.core;
 
 
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemOutput;
 import com.example.zoostorestorage.core.exception.NegativeUpdatedQuantityException;
 import com.example.zoostorestorage.core.exception.NoSuchItemException;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
@@ -11,7 +11,6 @@ import com.example.zoostorestorage.persistence.repositories.ItemStorageRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service

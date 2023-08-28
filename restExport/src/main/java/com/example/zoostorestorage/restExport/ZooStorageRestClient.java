@@ -1,32 +1,36 @@
 package com.example.zoostorestorage.restExport;
 
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageInput;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemStorageByIdOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageInput;
-import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleInput;
-import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceInput;
-import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemStorageByIdOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.remove.RemoveItemFromStorageInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.remove.RemoveItemFromStorageOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.sell.SellInput;
+import com.example.zoostorestorage.api.operations.itemstorage.sell.SellOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.setprice.SetItemPriceInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.setprice.SetItemPriceOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.warrantyperiodvalidation.WarrantyPeriodValidationInput;
+import com.example.zoostorestorage.api.operations.itemstorage.warrantyperiodvalidation.WarrantyPeriodValidationOutput;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
-import lombok.RequiredArgsConstructor;
 
 
 @Headers({"Content-Type: application/json"})
 public interface ZooStorageRestClient {
 
-    @RequestLine("POST /storage/sale")
-    SaleOutput sale(SaleInput input);
+    @RequestLine("POST /storage/sell")
+    SellOutput sell(SellInput input);
 
-    @RequestLine("PATCH /storage/importItem")
-    ImportItemOutput importItem(@Param ImportItemInput input);
+    @RequestLine("POST /storage/warranty")
+    WarrantyPeriodValidationOutput warranty(WarrantyPeriodValidationInput input);
+
+    @RequestLine("POST /storage/importItem")
+    ImportItemOutput importItem(ImportItemInput input);
 
     @RequestLine("PATCH /storage/exportItem")
     ExportItemOutput exportItem(@Param ExportItemInput input);

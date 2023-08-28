@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -27,10 +28,9 @@ public class OrderRecord {
     @OneToMany(mappedBy = "orderRecord")
     private List<OrderItem> items;
 
-//    @Column(nullable = false)
-    @Builder.Default
-    private Double totalPrice = 0.0;
+    private BigDecimal totalPrice = BigDecimal.ZERO;
 
+    @Column
     @CreationTimestamp
     private Timestamp timestamp;
 

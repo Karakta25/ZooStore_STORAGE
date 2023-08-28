@@ -3,15 +3,18 @@ package com.example.zoostorestorage.core;
 
 
 import com.example.zoostoreproject.restExport.ZooStoreRestClient;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageInput;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageOutput;
 import com.example.zoostorestorage.core.exception.NoSuchItemException;
+import com.example.zoostorestorage.persistence.OrderItemStatus;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
 import com.example.zoostorestorage.persistence.repositories.ItemStorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,23 +24,15 @@ public class AddItemToStorageOperationProcessor<GetItemByIdOutput> implements Ad
     private final ItemStorageRepository itemStorageRepository;
     private final ZooStoreRestClient zooStoreRestClient;
 
-
-
     @Override
     public AddItemToStorageOutput process(AddItemToStorageInput input) {
-        try
-        {
-             zooStoreRestClient.getItemById(input.getItemID());
-        }
-        catch (Exception e)
-        {
-            throw new NoSuchItemException();
-        }
+
+        Optional.ofNullable(zooStoreRestClient.getItemById(input.getItemID())).orElseThrow(NoSuchItemException::new);
 
         ItemStorage item = ItemStorage.builder()
                 .itemID(UUID.fromString(input.getItemID()))
                 .quantity(input.getQuantity())
-                .price(input.getPrice())
+                .price(BigDecimal.valueOf(input.getPrice()))
                 .build();
 
         itemStorageRepository.save(item);
@@ -45,10 +40,10 @@ public class AddItemToStorageOperationProcessor<GetItemByIdOutput> implements Ad
         return AddItemToStorageOutput.builder()
                 .itemID(item.getItemID().toString())
                 .quantity(item.getQuantity())
-                .price(item.getPrice())
+                .price(item.getPrice().doubleValue())
+                .status(String.valueOf(OrderItemStatus.IN_STOCK))
                 .build();
 
 
     }
-
 }

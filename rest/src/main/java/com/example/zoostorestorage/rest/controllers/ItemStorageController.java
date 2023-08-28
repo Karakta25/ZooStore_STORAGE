@@ -1,27 +1,30 @@
 package com.example.zoostorestorage.rest.controllers;
 
 
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageInput;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.addItemToStorage.AddItemToStorageOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdInput;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemByIdOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.getItemById.GetItemStorageByIdOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.exportItem.ExportItemOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageInput;
-import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.removeItemFromStorage.RemoveItemFromStorageOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleInput;
-import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.sale.SaleOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceInput;
-import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOperation;
-import com.example.zoostorestorage.api.operations.itemStorage.setItemPrice.SetItemPriceOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.add.AddItemToStorageOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemByIdInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemByIdOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.getbyid.GetItemStorageByIdOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.export.ExportItemOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.remove.RemoveItemFromStorageInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.remove.RemoveItemFromStorageOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.remove.RemoveItemFromStorageOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.sell.SellInput;
+import com.example.zoostorestorage.api.operations.itemstorage.sell.SellOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.sell.SellOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.setprice.SetItemPriceInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.setprice.SetItemPriceOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.setprice.SetItemPriceOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.warrantyperiodvalidation.WarrantyPeriodValidationInput;
+import com.example.zoostorestorage.api.operations.itemstorage.warrantyperiodvalidation.WarrantyPeriodValidationOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.warrantyperiodvalidation.WarrantyPeriodValidationOutput;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +41,10 @@ public class ItemStorageController {
     private final GetItemByIdOperation getItemByIdOperation;
     private final AddItemToStorageOperation addItemToStorageOperation;
     private final RemoveItemFromStorageOperation removeItemFromStorageOperation;
-    private final SaleOperation saleOperation;
+    private final SellOperation sellOperation;
+    private final WarrantyPeriodValidationOperation warrantyPeriodValidationOperation;
 
-    @PatchMapping(path = "/importItem")
+    @PostMapping(path = "/importItem")
     public ResponseEntity<ImportItemOutput> importItem(@Valid @RequestBody ImportItemInput input)
     {
         ImportItemOutput response = importItemOperation.process(input);
@@ -68,11 +72,17 @@ public class ItemStorageController {
         return ResponseEntity.status(201).body(response);
     }
 
-
-    @PostMapping(path = "/sale")
-    public ResponseEntity<SaleOutput> saleOperation(@Valid @RequestBody SaleInput input)
+    @PostMapping(path = "/warranty")
+    public ResponseEntity<WarrantyPeriodValidationOutput> warrantyValidation(@Valid @RequestBody WarrantyPeriodValidationInput input)
     {
-        SaleOutput response = this.saleOperation.process(input);
+        WarrantyPeriodValidationOutput response = this.warrantyPeriodValidationOperation.process(input);
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @PostMapping(path = "/sell")
+    public ResponseEntity<SellOutput> sellOperation(@Valid @RequestBody SellInput input)
+    {
+        SellOutput response = this.sellOperation.process(input);
         return ResponseEntity.ok(response);
     }
 

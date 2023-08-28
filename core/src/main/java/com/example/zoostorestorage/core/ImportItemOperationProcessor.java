@@ -1,15 +1,14 @@
 package com.example.zoostorestorage.core;
 
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemInput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOutput;
-import com.example.zoostorestorage.api.operations.itemStorage.importItem.ImportItemOperation;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemInput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemOutput;
+import com.example.zoostorestorage.api.operations.itemstorage.item.importe.ImportItemOperation;
 import com.example.zoostorestorage.core.exception.NoSuchItemException;
 import com.example.zoostorestorage.persistence.entities.ItemStorage;
 import com.example.zoostorestorage.persistence.repositories.ItemStorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
